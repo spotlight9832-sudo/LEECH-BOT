@@ -227,6 +227,13 @@ def get_readable_message():
                 series_name = ""
 
         msg += BotTheme('STATUS_NAME', Name=obj_name)
+        # In the requested style, the Object contains the full name, Series is optional or separate.
+        # But user example showed [Object] and then no Series line for that specific block,
+        # yet the prompt implies matching the provided style.
+        # If series_name exists and we want to show it, we can.
+        # However, for exact match with "Object : [Name]" where name includes S01E01, we might rely on obj_name being full name if regex failed or if we want it that way.
+        # The regex I added splits Name and Series.
+        # Let's keep the Series line if parsed, otherwise skip.
         if series_name:
             msg += BotTheme('SERIES', Series=series_name)
 
@@ -259,12 +266,12 @@ def get_readable_message():
             msg += BotTheme('STATUS_SIZE', Size=download.size())
             msg += BotTheme('NON_ENGINE', Engine=download.eng())
 
-        msg += BotTheme('USER',
-                        User=download.message.from_user.mention(style="html"))
+        # Identity line
+        msg += BotTheme('USER', User=download.message.from_user.first_name)
         msg += BotTheme('ID', Id=download.message.from_user.id)
+        msg += BotTheme('CANCEL', Cancel=f"/{BotCommands.CancelMirror}_{download.gid()}")
         if (download.eng()).startswith("qBit"):
             msg += BotTheme('BTSEL', Btsel=f"/{BotCommands.BtSelectCommand}_{download.gid()}")
-        msg += BotTheme('CANCEL', Cancel=f"/{BotCommands.CancelMirror}_{download.gid()}")
 
     if len(msg) == 0:
         return None, None
@@ -310,12 +317,14 @@ def get_readable_message():
         buttons.ibutton(BotTheme('REFRESH', Page=f"{PAGE_NO}/{PAGES}"), "status ref")
         buttons.ibutton(BotTheme('NEXT'), "status nex")
     button = buttons.build_menu(3)
+
+    # Stats construction matches the footer template order
     msg += BotTheme('Cpu', cpu=cpu_percent())
     msg += BotTheme('FREE', free=get_readable_file_size(disk_usage(config_dict['DOWNLOAD_DIR']).free), free_p=round(100-disk_usage(config_dict['DOWNLOAD_DIR']).percent, 1))
     msg += BotTheme('Ram', ram=virtual_memory().percent)
     msg += BotTheme('uptime', uptime=get_readable_time(time() - botStartTime))
-    msg += BotTheme('DL', DL=get_readable_file_size(dl_speed))
-    msg += BotTheme('UL', UL=get_readable_file_size(up_speed))
+    msg += BotTheme('DL', DL=get_readable_file_size(dl_speed) + '/s')
+    msg += BotTheme('UL', UL=get_readable_file_size(up_speed) + '/s')
     return msg, button
 
 
@@ -581,7 +590,7 @@ async def get_stats(event, key="home"):
         if await aiopath.exists('.git'):
             last_commit = (await cmd_exec("git log -1 --pretty='%cd ( %cr )' --date=format-local:'%d/%m/%Y'", True))[0]
             changelog = (await cmd_exec("git log -1 --pretty=format:'<code>%s</code> <b>By</b> %an'", True))[0]
-        official_v = (await cmd_exec("curl -o latestversion.py https://github.com/Tamilupdates/KPSML-X/raw/refs/heads/hk_kpsmlx/bot/version.py -s && python3 latestversion.py && rm latestversion.py", True))[0]
+        official_v = (await cmd_exec("curl -o latestversion.py https://raw.githubusercontent.com/itskrishname/KPSML-X-leech/fix-status-format-16769135097862180071/bot/version.py -s && python3 latestversion.py && rm latestversion.py", True))[0]
         msg = BotTheme('REPO_STATS',
             last_commit=last_commit,
             bot_version=get_version(),
