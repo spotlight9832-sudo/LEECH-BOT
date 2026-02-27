@@ -136,7 +136,7 @@ Type {help_command} to get a list of available commands</b>'''
     L_LOG_START =           "➲ <b><u>Leech Started :</u></b>\n┃\n┠ <b>User :</b> {mention} ( #ID{uid} )\n┖ <b>Source :</b> <a href='{msg_link}'>Click Here</a>"
 
     # async def onUploadComplete(): ---> tasks_listener.py
-    NAME =                  'ꜱʏꜱᴛᴇᴍ ᴏᴜᴛᴘᴜᴛ: ꜰɪʟᴇ ᴛʀᴀɴꜱꜰᴇʀ\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nᴛɪᴛʟᴇ : {Name}\n'
+    NAME =                  'ꜱʏꜱᴛᴇᴍ ᴏᴜᴛᴘᴜᴛ: ꜰɪʟᴇ ᴛʀᴀɴꜱꜰᴇʀ [https://t.me/SECRECT_BOT_UPDATES]\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nᴛɪᴛʟᴇ : {Name}\n'
     SIZE =                  '┃ sɪᴢᴇ : {Size}\n'
     ELAPSE =                '┃ ᴛɪᴍᴇ : {Time}\n'
     MODE =                  '┃ ᴍᴏᴅᴇ : {Mode}\n'
@@ -146,8 +146,8 @@ Type {help_command} to get a list of available commands</b>'''
     L_CORRUPTED_FILES =     '┃ ᴄᴏʀʀᴜᴘᴛᴇᴅ ꜰɪʟᴇs: {Corrupt}\n'
     L_CC =                  '┃ ᴜᴘʟᴏᴀᴅᴇʀ : {Tag}\nɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ\n'
     PM_BOT_MSG =            '➲ <b><i>File(s) have been Sent above</i></b>'
-    L_BOT_MSG =             'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nɴᴇᴛᴡᴏʀᴋ: @ʜᴏʏᴏᴠᴇʀsᴇ'
-    L_LL_MSG =              'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nɴᴇᴛᴡᴏʀᴋ: @ʜᴏʏᴏᴠᴇʀsᴇ'
+    L_BOT_MSG =             'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nɴᴇᴛᴡᴏʀᴋ: @SECRECT_BOT_UPDATES'
+    L_LL_MSG =              'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━'
 
     # ----- MIRROR -------
     M_TYPE =                '┠ <b>Type: </b>{Mimetype}\n'
