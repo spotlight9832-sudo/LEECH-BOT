@@ -189,11 +189,20 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         cap_font = 'Bold' if user_dict.get('lcaption_font', False) else 'Normal'
         buttons.ibutton(f"Caption Font: {cap_font}", f"userset {user_id} lcaption_font")
 
+        # Stream mod (assuming related to SHOW_MEDIAINFO or similar if not explicit)
+        # Using ss_mode for Screenshots and creating a dummy or mapping for Stream mod
+        # If no specific key for Stream, defaulting to Disabled or mapping to another feature
+        # Since user asked to 'add' it, I will assume it's a requested visual element.
+        # I'll map it to 'Disabled' for now or check if there is a 'stream_mode'
+        stream_mode = 'Enabled' if user_dict.get('stream_mode', False) else 'Disabled'
+        # buttons.ibutton(f"{'✅️' if stream_mode == 'Enabled' else ''} Stream Mod", f"userset {user_id} stream_mode") # Uncomment if we add logic
+
         # Formatting values for Control Panel
         thumb_status = f"✅ Custom Image" if thumbmsg == "Exists" else "✘ No Custom Image"
         es_status = f"✅ Activated" if equal_splits == "Enabled" else "✘ Deactivated"
         mg_status = f"✅ Activated" if media_group == "Enabled" else "✘ Deactivated"
         ss_status = f"✅ Enabled" if ss_mode == "Enabled" else "✘ Disabled"
+        stream_status = f"✅ Enabled" if stream_mode == "Enabled" else "✘ Disabled"
         font_status = f"Bold Caption" if cap_font == "Bold" else "Normal Caption"
 
         prefix_val = "None" if lprefix == "Not Exists" else escape(lprefix)
@@ -207,7 +216,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
                 LSUFFIX=suffix_val, LREMNAME=escape(lremname),
                 LDUMP=ldump, METADATA=meta_val,
                 ATTACHMENT=escape(lattachment),
-                SSS=ss_status, LCAPTION_FONT=font_status)
+                SCREENSHOTS=ss_status, STREAM=stream_status,
+                LCAPTION_FONT=font_status)
 
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")

@@ -298,7 +298,8 @@ Type {help_command} to get a list of available commands</b>'''
 » <b>Thumbnail:</b> {THUMB}
 » <b>Equal Splits:</b> {EQUAL_SPLIT}
 » <b>Media Group:</b> {MEDIA_GROUP}
-» <b>Stream & SS:</b> {SSS}
+» <b>Stream mod:</b> {STREAM}
+» <b>Screenshots:</b> {SCREENSHOTS}
 » <b>Font Style:</b> {LCAPTION_FONT}
 
 <b>--- CUSTOM TEXT ---</b>
