@@ -288,18 +288,20 @@ Type {help_command} to get a list of available commands</b>'''
 ┠<b> Total User TD(s) :</b> <i>{USERTD}</i>
 ┖<b> Daily Mirror :</b> <code>{DM}</code> per day'''
 
-    LEECH = '''㊂ <b><u>Leech Settings for {NAME}</u></b>
+    LEECH = '''〔 <b>LEECH CONTROL PANEL</b> 〕
 
-┎<b> Daily Leech : </b><code>{DL}</code> per day
-┠<b> Leech Type :</b> <i>{LTYPE}</i>
-┠<b> Custom Thumbnail :</b> <i>{THUMB}</i>
-┠<b> Leech Split Size :</b> <code>{SPLIT_SIZE}</code>
-┠<b> Equal Splits :</b> <i>{EQUAL_SPLIT}</i>
-┠<b> Media Group :</b> <i>{MEDIA_GROUP}</i>
-┠<b> Leech Caption :</b> <code>{LCAPTION}</code>
-┠<b> Leech Prefix :</b> <code>{LPREFIX}</code>
-┠<b> Leech Suffix :</b> <code>{LSUFFIX}</code>
-┠<b> Leech Remname :</b> <code>{LREMNAME}</code>
-┠<b> Leech Dumps :</b> <code>{LDUMP}</code>
-┠<b> Leech Attachment :</b> <code>{ATTACHMENT}</code>
-┖<b> Leech Metadata :</b> <b><code>{METADATA}</code></b>'''
+● <b>Usage:</b> Unlimited [ {DL} ]
+● <b>Type:</b> {LTYPE}
+● <b>Split Size:</b> {SPLIT_SIZE}
+
+<b>--- CONFIGURATION ---</b>
+» <b>Thumbnail:</b> {THUMB}
+» <b>Equal Splits:</b> {EQUAL_SPLIT}
+» <b>Media Group:</b> {MEDIA_GROUP}
+» <b>Stream & SS:</b> {SSS}
+» <b>Font Style:</b> {LCAPTION_FONT}
+
+<b>--- CUSTOM TEXT ---</b>
+» <b>Prefix:</b> {LPREFIX}
+» <b>Suffix:</b> {LSUFFIX}
+» <b>Metadata:</b> {METADATA}'''

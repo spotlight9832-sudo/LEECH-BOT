@@ -178,16 +178,36 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         lattachment = 'Not Exists' if (val:=user_dict.get('lattachment', config_dict.get('ATTACHMENT', ''))) == '' else val
         buttons.ibutton(f"{'✅️' if lattachment != 'Not Exists' else ''} Leech Attachment", f"userset {user_id} lattachment")
 
-        metadata = 'Not Exists' if (val:=user_dict.get('metadata', config_dict.get('METADATA', ''))) == '' else val
-        buttons.ibutton(f"{'✅️' if metadata != 'Not Exists' else ''} Leech Metadata", f"userset {user_id} metadata")
+        metadata = 'None' if (val:=user_dict.get('metadata', config_dict.get('METADATA', ''))) == '' else val
+        buttons.ibutton(f"{'✅️' if metadata != 'None' else ''} Leech Metadata", f"userset {user_id} metadata")
+
+        # Stream & SS
+        ss_mode = 'Enabled' if user_dict.get('ss_mode', config_dict.get('SCREENSHOTS_MODE')) else 'Disabled'
+        buttons.ibutton(f"{'✅️' if ss_mode == 'Enabled' else ''} Screenshots", f"userset {user_id} ss_mode")
+
+        # Caption Font
+        cap_font = 'Bold' if user_dict.get('lcaption_font', False) else 'Normal'
+        buttons.ibutton(f"Caption Font: {cap_font}", f"userset {user_id} lcaption_font")
+
+        # Formatting values for Control Panel
+        thumb_status = f"✅ Custom Image" if thumbmsg == "Exists" else "✘ No Custom Image"
+        es_status = f"✅ Activated" if equal_splits == "Enabled" else "✘ Deactivated"
+        mg_status = f"✅ Activated" if media_group == "Enabled" else "✘ Deactivated"
+        ss_status = f"✅ Enabled" if ss_mode == "Enabled" else "✘ Disabled"
+        font_status = f"Bold Caption" if cap_font == "Bold" else "Normal Caption"
+
+        prefix_val = "None" if lprefix == "Not Exists" else escape(lprefix)
+        suffix_val = "None" if lsuffix == "Not Exists" else escape(lsuffix)
+        meta_val = "Original" if metadata == "None" else escape(metadata)
 
         text = BotTheme('LEECH', NAME=name, DL=f"{dailyll} / {dailytlle}",
-                LTYPE=ltype, THUMB=thumbmsg, SPLIT_SIZE=split_size,
-                EQUAL_SPLIT=equal_splits, MEDIA_GROUP=media_group,
-                LCAPTION=escape(lcaption), LPREFIX=escape(lprefix),
-                LSUFFIX=escape(lsuffix), LREMNAME=escape(lremname),
-                LDUMP=ldump, METADATA=escape(metadata),
-                ATTACHMENT=escape(lattachment))
+                LTYPE=ltype, THUMB=thumb_status, SPLIT_SIZE=split_size,
+                EQUAL_SPLIT=es_status, MEDIA_GROUP=mg_status,
+                LCAPTION=escape(lcaption), LPREFIX=prefix_val,
+                LSUFFIX=suffix_val, LREMNAME=escape(lremname),
+                LDUMP=ldump, METADATA=meta_val,
+                ATTACHMENT=escape(lattachment),
+                SSS=ss_status, LCAPTION_FONT=font_status)
 
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
@@ -576,6 +596,20 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         update_user_ldata(user_id, 'media_group', not user_dict.get('media_group', False))
+        await update_user_settings(query, 'leech')
+        if DATABASE_URL:
+            await DbManger().update_user_data(user_id)
+    elif data[2] == 'ss_mode':
+        handler_dict[user_id] = False
+        await query.answer()
+        update_user_ldata(user_id, 'ss_mode', not user_dict.get('ss_mode', False))
+        await update_user_settings(query, 'leech')
+        if DATABASE_URL:
+            await DbManger().update_user_data(user_id)
+    elif data[2] == 'lcaption_font':
+        handler_dict[user_id] = False
+        await query.answer()
+        update_user_ldata(user_id, 'lcaption_font', not user_dict.get('lcaption_font', False))
         await update_user_settings(query, 'leech')
         if DATABASE_URL:
             await DbManger().update_user_data(user_id)
