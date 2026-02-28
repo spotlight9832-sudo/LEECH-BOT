@@ -779,6 +779,57 @@ def set_priority(id_):
     return list_torrent_contents(id_)
 
 
+@app.route('/v/<string:id_>', methods=['GET'])
+def stream_video(id_):
+    # This is a placeholder for the Stream Engine UI.
+    # Note: Actual video streaming from Telegram requires a complex Pyrogram/Aiohttp streaming backend.
+    return f"""
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Professional Stream Engine 3.0</title>
+        <style>
+            body {{ background-color: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }}
+            .container {{ max-width: 800px; margin: auto; }}
+            .video-placeholder {{ width: 100%; height: 400px; background-color: #222; border: 1px solid #444; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }}
+            .btn {{ display: inline-block; padding: 10px 20px; background-color: #444; color: white; text-decoration: none; border-radius: 5px; margin: 10px; }}
+            .btn:hover {{ background-color: #666; }}
+            .track-box {{ background-color: #111; padding: 15px; margin-top: 20px; border-radius: 10px; text-align: left; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Professional Stream Engine 3.0</h2>
+            <p>Video ID: {id_}</p>
+            <div class="video-placeholder">
+                <p><i>[ Video Player Backend Not Implemented in this Mirror Bot ]</i></p>
+            </div>
+
+            <a href="/download?path={id_}" class="btn">Download Full Video</a>
+            <a href="https://t.me/KPSBots" class="btn">Support Group</a>
+
+            <div class="track-box">
+                <h3>TRACK EXTRACTION CENTER</h3>
+                <p><i>Note: Metadata extraction requires downloading the file or parsing MTProto headers, which is not implemented in this mock UI.</i></p>
+                <a href="#" class="btn" style="float: right; background-color: #0056b3;">Extract MP3</a>
+                <p>Audio Track 1 (hin)</p>
+                <hr style="border-color: #333;">
+                <a href="#" class="btn" style="float: right; background-color: #0056b3;">Extract ASS</a>
+                <p>Subtitle 1 (eng)</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
+@app.route('/download', methods=['GET'])
+def download_file():
+    path = request.args.get('path')
+    if not path:
+        return "Missing path parameter", 400
+    return f"<h1>Download requested for ID: {path}</h1><p>Note: Direct downloading from Telegram requires a streaming backend not present in this bot.</p>"
+
 @app.route('/')
 def homepage():
     return """
