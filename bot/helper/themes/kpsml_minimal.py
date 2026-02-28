@@ -149,6 +149,9 @@ Type {help_command} to get a list of available commands</b>'''
     L_BOT_MSG =             'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nɴᴇᴛᴡᴏʀᴋ: @SECRECT_BOT_UPDATES'
     L_LL_MSG =              'ᴛʜᴇ ғɪʟᴇ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴏᴜᴛᴇᴅ\nᴛᴏ ʏᴏᴜʀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇssᴀɢᴇs (ʙᴏᴛ ᴘᴍ).\n━━━━━━━━━━━━━━━━━━━━━━━━━━'
 
+    # ----- STREAM MOD -------
+    STREAM_LINKS =         '\nProfessional Stream Engine 3.0\n\n<a href="{Stream}">Stream Link</a> | <a href="{Download}">Download Link</a>\n'
+
     # ----- MIRROR -------
     M_TYPE =                '┠ <b>Type: </b>{Mimetype}\n'
     M_SUBFOLD =             '┠ <b>SubFolders: </b>{Folder}\n'

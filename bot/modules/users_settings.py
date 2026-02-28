@@ -195,7 +195,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         # Since user asked to 'add' it, I will assume it's a requested visual element.
         # I'll map it to 'Disabled' for now or check if there is a 'stream_mode'
         stream_mode = 'Enabled' if user_dict.get('stream_mode', False) else 'Disabled'
-        # buttons.ibutton(f"{'✅️' if stream_mode == 'Enabled' else ''} Stream Mod", f"userset {user_id} stream_mode") # Uncomment if we add logic
+        buttons.ibutton(f"{'✅️' if stream_mode == 'Enabled' else ''} Stream Mod", f"userset {user_id} stream_mode")
 
         # Formatting values for Control Panel
         thumb_status = f"✅ Custom Image" if thumbmsg == "Exists" else "✘ No Custom Image"
@@ -620,6 +620,13 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         update_user_ldata(user_id, 'lcaption_font', not user_dict.get('lcaption_font', False))
+        await update_user_settings(query, 'leech')
+        if DATABASE_URL:
+            await DbManger().update_user_data(user_id)
+    elif data[2] == 'stream_mode':
+        handler_dict[user_id] = False
+        await query.answer()
+        update_user_ldata(user_id, 'stream_mode', not user_dict.get('stream_mode', False))
         await update_user_settings(query, 'leech')
         if DATABASE_URL:
             await DbManger().update_user_data(user_id)

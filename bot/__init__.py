@@ -727,7 +727,8 @@ config_dict = {'ANIME_TEMPLATE': ANIME_TEMPLATE,
                'USER_TD_SA': USER_TD_SA,
                'USE_SERVICE_ACCOUNTS': USE_SERVICE_ACCOUNTS,
                'WEB_PINCODE': WEB_PINCODE,
-               'YT_DLP_OPTIONS': YT_DLP_OPTIONS}
+               'YT_DLP_OPTIONS': YT_DLP_OPTIONS,
+               'STREAM_BASE_URL': environ.get('STREAM_BASE_URL', '')}
 
 if GDRIVE_ID:
     list_drives_dict['Main'] = {"drive_id": GDRIVE_ID, "index_link": INDEX_URL}

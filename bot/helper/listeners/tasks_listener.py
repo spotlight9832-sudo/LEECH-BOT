@@ -505,6 +505,16 @@ class MirrorLeechListener:
                 fmsg = '\n'
                 for index, (link, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{link}'>{name}</a>\n"
+
+                    if user_dict.get('stream_mode') and config_dict.get('STREAM_BASE_URL'):
+                        try:
+                            msg_id = link.split('/')[-1]
+                            stream_link = f"{config_dict['STREAM_BASE_URL'].rstrip('/')}/v/{msg_id}"
+                            download_link = f"{config_dict['STREAM_BASE_URL'].rstrip('/')}/download?path={msg_id}"
+                            fmsg += BotTheme('STREAM_LINKS', Stream=stream_link, Download=download_link)
+                        except Exception as e:
+                            LOGGER.error(f"Failed to generate stream link: {e}")
+
                     if len(msg.encode() + fmsg.encode()) > (4000 if len(config_dict['IMAGES']) == 0 else 1000):
 
                         if config_dict['SAFE_MODE']:
