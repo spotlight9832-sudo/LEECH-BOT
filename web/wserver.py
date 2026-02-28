@@ -780,7 +780,7 @@ def set_priority(id_):
 
 
 
-@app.route('/v/<string:id_>', methods=['GET'])
+@app.route('/<string:id_>', methods=['GET'])
 def stream_video(id_):
     return f'''
     <html lang="en">
@@ -915,13 +915,13 @@ def stream_video(id_):
 
             <div class="video-container">
                 <video id="player" playsinline controls data-poster="https://graph.org/file/0ff9d5e94a070fe4154c0.jpg">
-                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
                 </video>
             </div>
 
             <div class="btn-container">
-                <a href="/download?path={{id_}}" class="btn">Download Full Video</a>
-                <a href="https://t.me/KPSBots" class="btn btn-secondary">Support Group</a>
+                <a href="/download/{{id_}}" class="btn">Download Full Video</a>
+                <a href="https://t.me/SECRECT_BOT_UPDATES" class="btn btn-secondary">Support Group</a>
             </div>
 
             <div class="track-box">
@@ -952,9 +952,9 @@ def stream_video(id_):
     '''
 
 
-@app.route('/download', methods=['GET'])
-def download_file():
-    path = request.args.get('path')
+@app.route('/download/<string:id_>', methods=['GET'])
+def download_file(id_):
+    path = id_
     if not path:
         return "Missing path parameter", 400
     return f"<h1>Download requested for ID: {path}</h1><p>Note: Direct downloading from Telegram requires a streaming backend not present in this bot.</p>"
