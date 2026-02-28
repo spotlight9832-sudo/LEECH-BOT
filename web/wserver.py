@@ -779,49 +779,178 @@ def set_priority(id_):
     return list_torrent_contents(id_)
 
 
+
 @app.route('/v/<string:id_>', methods=['GET'])
 def stream_video(id_):
-    # This is a placeholder for the Stream Engine UI.
-    # Note: Actual video streaming from Telegram requires a complex Pyrogram/Aiohttp streaming backend.
-    return f"""
+    return f'''
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Professional Stream Engine 3.0</title>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet" />
         <style>
-            body {{ background-color: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }}
-            .container {{ max-width: 800px; margin: auto; }}
-            .video-placeholder {{ width: 100%; height: 400px; background-color: #222; border: 1px solid #444; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }}
-            .btn {{ display: inline-block; padding: 10px 20px; background-color: #444; color: white; text-decoration: none; border-radius: 5px; margin: 10px; }}
-            .btn:hover {{ background-color: #666; }}
-            .track-box {{ background-color: #111; padding: 15px; margin-top: 20px; border-radius: 10px; text-align: left; }}
+            body {{
+                background-color: #1A2238;
+                color: #FFFFFF;
+                font-family: 'Ubuntu', sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }}
+            .header {{
+                background-color: #111726;
+                padding: 15px 20px;
+                border-bottom: 2px solid #FF9E6D;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            }}
+            .header h2 {{ margin: 0; font-size: 20px; color: #FFFFFF; }}
+            .container {{ max-width: 900px; margin: 30px auto; padding: 20px; }}
+            .video-container {{
+                width: 100%;
+                background-color: #000;
+                border: 2px solid #FF9E6D;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 8px 16px rgba(255, 158, 109, 0.2);
+                margin-bottom: 30px;
+            }}
+            .btn-container {{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+                margin-bottom: 30px;
+            }}
+            .btn {{
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: #FF9E6D;
+                color: #1A2238;
+                text-decoration: none;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                width: 80%;
+                max-width: 300px;
+                border: 2px solid transparent;
+            }}
+            .btn:hover {{
+                background-color: transparent;
+                color: #FF9E6D;
+                border-color: #FF9E6D;
+                box-shadow: 0 0 10px rgba(255, 158, 109, 0.5);
+            }}
+            .btn-secondary {{
+                background-color: #2c3a60;
+                color: #FFFFFF;
+                border: 2px solid transparent;
+            }}
+            .btn-secondary:hover {{
+                background-color: transparent;
+                color: #FFFFFF;
+                border-color: #2c3a60;
+                box-shadow: 0 0 10px rgba(44, 58, 96, 0.5);
+            }}
+            .track-box {{
+                background-color: #111726;
+                padding: 20px;
+                border-radius: 12px;
+                text-align: left;
+                border: 1px solid rgba(255, 158, 109, 0.3);
+            }}
+            .track-box h3 {{
+                color: #FF9E6D;
+                margin-top: 0;
+                border-bottom: 1px solid rgba(255, 158, 109, 0.3);
+                padding-bottom: 10px;
+            }}
+            .track-item {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }}
+            .track-item:last-child {{
+                border-bottom: none;
+            }}
+            .btn-small {{
+                padding: 8px 16px;
+                font-size: 14px;
+                width: auto;
+                margin: 0;
+            }}
+
+            /* Customizing Plyr for Theme */
+            .plyr--video .plyr__control--overlaid {{
+                background: rgba(255, 158, 109, 0.8);
+            }}
+            .plyr--video .plyr__control.plyr__tab-focus,
+            .plyr--video .plyr__control:hover,
+            .plyr--video .plyr__control[aria-expanded=true] {{
+                background: #FF9E6D;
+            }}
+            .plyr__control--overlaid:focus, .plyr__control--overlaid:hover {{
+                background: #FF9E6D;
+            }}
+            .plyr--full-ui input[type=range] {{
+                color: #FF9E6D;
+            }}
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="header">
             <h2>Professional Stream Engine 3.0</h2>
-            <p>Video ID: {id_}</p>
-            <div class="video-placeholder">
-                <p><i>[ Video Player Backend Not Implemented in this Mirror Bot ]</i></p>
+            <div style="font-size: 14px; color: #aaa;">ID: {{id_}}</div>
+        </div>
+
+        <div class="container">
+            <h3 style="color: #FF9E6D; margin-bottom: 20px;">Now Playing</h3>
+
+            <div class="video-container">
+                <video id="player" playsinline controls data-poster="https://graph.org/file/0ff9d5e94a070fe4154c0.jpg">
+                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                </video>
             </div>
 
-            <a href="/download?path={id_}" class="btn">Download Full Video</a>
-            <a href="https://t.me/KPSBots" class="btn">Support Group</a>
+            <div class="btn-container">
+                <a href="/download?path={{id_}}" class="btn">Download Full Video</a>
+                <a href="https://t.me/KPSBots" class="btn btn-secondary">Support Group</a>
+            </div>
 
             <div class="track-box">
                 <h3>TRACK EXTRACTION CENTER</h3>
-                <p><i>Note: Metadata extraction requires downloading the file or parsing MTProto headers, which is not implemented in this mock UI.</i></p>
-                <a href="#" class="btn" style="float: right; background-color: #0056b3;">Extract MP3</a>
-                <p>Audio Track 1 (hin)</p>
-                <hr style="border-color: #333;">
-                <a href="#" class="btn" style="float: right; background-color: #0056b3;">Extract ASS</a>
-                <p>Subtitle 1 (eng)</p>
+                <p style="font-size: 14px; color: #bbb; font-style: italic; margin-bottom: 15px;">Note: Direct streaming backend is using a placeholder. Metadata extraction requires downloading the file.</p>
+
+                <div class="track-item">
+                    <span>Audio Track 1 (hin)</span>
+                    <a href="#" class="btn btn-secondary btn-small">Extract MP3</a>
+                </div>
+
+                <div class="track-item">
+                    <span>Subtitle 1 (eng)</span>
+                    <a href="#" class="btn btn-secondary btn-small">Extract ASS</a>
+                </div>
             </div>
         </div>
+
+        <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+        <script>
+            const player = new Plyr('#player', {{
+                title: 'Video Player',
+                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
+            }});
+        </script>
     </body>
     </html>
-    """
+    '''
+
 
 @app.route('/download', methods=['GET'])
 def download_file():
