@@ -350,7 +350,7 @@ async def load_config():
         RCLONE_SERVE_PASS = ''
 
     await (await create_subprocess_exec("pkill", "-9", "-f", "gunicorn")).wait()
-    BASE_URL = environ.get('BASE_URL', '').rstrip("/")
+    BASE_URL = environ.get('BASE_URL', 'VERCEL_URL', 'VERCEL_API', '').rstrip("/")
     if len(BASE_URL) == 0:
         BASE_URL = ''
     else:
