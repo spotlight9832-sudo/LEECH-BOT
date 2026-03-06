@@ -5,20 +5,3 @@ __pycache__
 *.txt
 *.pyc
 qBittorrent/
-<<<<<<< Updated upstream
-.vscode/
-venv/
-env/
-__pycache__/
-*.pyc
-bot/__pycache__/
-bot/*/__pycache__/
-bot/*/*/__pycache__/
-=======
-__pycache__
-bot/__pycache__
-bot/helper/__pycache__
-bot/helper/mirror_utils/__pycache__
-bot/helper/listeners/__pycache__
-*.pyc
->>>>>>> Stashed changes

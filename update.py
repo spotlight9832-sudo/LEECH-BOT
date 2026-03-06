@@ -63,7 +63,7 @@ if len(UPSTREAM_REPO) == 0:
 
 UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
 if len(UPSTREAM_BRANCH) == 0:
-    UPSTREAM_BRANCH = 'fix-status-format-16769135097862180071'
+    UPSTREAM_BRANCH = 'ui-and-vercel-config-update-9594096122446442009'
 
 if UPSTREAM_REPO is not None:
     if ospath.exists('.git'):
