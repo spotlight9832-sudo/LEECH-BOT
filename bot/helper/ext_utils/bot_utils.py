@@ -513,17 +513,27 @@ def new_thread(func):
 
 
 async def compare_versions(v1, v2):
-    v1_parts = [int(part) for part in v1.split('-')[0][1:].split('.')]
-    v2_parts = [int(part) for part in v2.split('-')[0][1:].split('.')]
-    for i in range(3):
-        v1_part, v2_part = v1_parts[i], v2_parts[i]
-        if v1_part < v2_part:
-            return "New Version Update is Available! Check Now!"
-        elif v1_part > v2_part:
-            return "More Updated! Kindly Contribute in Official"
-    return "Already up to date with latest version"
+    if v1 == v2:
+        return 'BOT IS UP TO DATE'
+    try:
+        if v1 == "Unknown" or v2 == "Unknown" or not v1 or not v2:
+            return 'COULD NOT CHECK UPDATE'
 
+        v1_parts = [int(part) for part in v1.split('-')[0].lstrip('v').split('.')]
+        v2_parts = [int(part) for part in v2.split('-')[0].lstrip('v').split('.')]
 
+        for i in range(max(len(v1_parts), len(v2_parts))):
+            part1 = v1_parts[i] if i < len(v1_parts) else 0
+            part2 = v2_parts[i] if i < len(v2_parts) else 0
+
+            if part1 < part2:
+                return 'BOT OUTDATED'
+            elif part1 > part2:
+                return 'BOT IS UP TO DATE'
+    except Exception as e:
+        return 'VERSION PARSE ERROR'
+
+    return 'BOT IS UP TO DATE'
 async def get_stats(event, key="home"):
     user_id = event.from_user.id
     btns = ButtonMaker()
